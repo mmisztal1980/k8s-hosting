@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",  
+  "profiles": {
+    "K8SHosting.NET6.GraphQL": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "graphql-voyager",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5024",
+      "dotnetRunMessages": true
+    },    
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true
+    }
+  }
+}
