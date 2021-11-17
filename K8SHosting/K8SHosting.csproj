@@ -3,6 +3,8 @@
 		<TargetFrameworks>net6.0</TargetFrameworks>
 		<LanguageVersion>latest</LanguageVersion>
 		<OutputType>Library</OutputType>
+		<!-- Required for class libs with Swashbuckle.AspeNetCore referenced -->
+		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
 	</PropertyGroup>
 
 	<ItemGroup>

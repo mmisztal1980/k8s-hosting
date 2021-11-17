@@ -44,6 +44,7 @@ namespace K8SHosting
 
                 app.UseMiddleware<StartupMiddleware>();
                 app.UseMiddleware<ReadinessMiddleware>();
+                app.UseMiddleware<ActiveRequestsMiddleware>();
 
                 app.UseAuthorization();
 

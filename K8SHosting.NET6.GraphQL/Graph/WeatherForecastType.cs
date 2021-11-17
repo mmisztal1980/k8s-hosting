@@ -1,4 +1,5 @@
 ﻿using HotChocolate.Types;
+using K8SHosting.NET6.GraphQL.WeatherForecasting;
 
 namespace K8SHosting.NET6.GraphQL.Graph
 {

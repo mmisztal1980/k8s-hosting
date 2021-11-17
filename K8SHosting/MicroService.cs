@@ -1,6 +1,9 @@
-﻿using K8SHosting.Startup;
+﻿using K8SHosting.Shutdown;
+using K8SHosting.Startup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -22,7 +25,11 @@ namespace K8SHosting
 
             ConfigureActions.Add((svc) => {
                 svc.AddSingleton<IMicroService>(this);
+                svc.AddSingleton<IActiveRequestsService, ActiveRequestsService>();
                 svc.AddHostedService<StartupService>();
+                svc.AddHostedService<ShutdownService>();
+
+                svc.Configure<HostOptions>(opts => opts.ShutdownTimeout = 60.Seconds());
             });            
         }
 
@@ -58,6 +65,8 @@ namespace K8SHosting
         public async Task RunAsync(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
 
             ConfigureActions.ForEach(action => action(builder.Services));
 
