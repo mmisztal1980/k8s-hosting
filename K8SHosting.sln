@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K8SHosting", "K8SHosting\K8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "K8SHosting.NET6.GraphQL", "K8SHosting.NET6.GraphQL\K8SHosting.NET6.GraphQL.csproj", "{E497F929-FD8E-4455-AE38-FB95995C723C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLTest", "GraphQLTest\GraphQLTest.csproj", "{D5D14EC7-2F0E-45A3-8ECB-30A2C82E5BBC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{E497F929-FD8E-4455-AE38-FB95995C723C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E497F929-FD8E-4455-AE38-FB95995C723C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E497F929-FD8E-4455-AE38-FB95995C723C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5D14EC7-2F0E-45A3-8ECB-30A2C82E5BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5D14EC7-2F0E-45A3-8ECB-30A2C82E5BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5D14EC7-2F0E-45A3-8ECB-30A2C82E5BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5D14EC7-2F0E-45A3-8ECB-30A2C82E5BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

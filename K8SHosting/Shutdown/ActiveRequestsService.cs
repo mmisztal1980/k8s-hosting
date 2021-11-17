@@ -9,6 +9,14 @@ namespace K8SHosting.Shutdown
         private long counter = 0L;
         private readonly ILogger<ActiveRequestsService> logger;
 
+        public long Counter 
+        { 
+            get 
+            {
+                return Interlocked.Read(ref counter);
+            } 
+        }
+
         public ActiveRequestsService(ILogger<ActiveRequestsService> logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -18,7 +26,7 @@ namespace K8SHosting.Shutdown
         { 
             get
             {
-                return Interlocked.Read(ref counter) == 0;
+                return Counter > 0;
             }
         }
 

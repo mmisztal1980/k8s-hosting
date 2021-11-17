@@ -12,6 +12,7 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly Random _rand = new Random(DateTime.UtcNow.Millisecond);
 
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
@@ -19,8 +20,10 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public async Task<IEnumerable<WeatherForecast>> Get()
     {
+        await Task.Delay(_rand.Next(25, 10000));
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),

@@ -24,13 +24,24 @@ namespace K8SHosting.Shutdown
         public Task StartAsync(CancellationToken cancellationToken)
         {
             lifetime.ApplicationStopping.Register(async () => await ExecuteGracefulShutdown(DefaultTimeoutSeconds).ConfigureAwait(false));
+            lifetime.ApplicationStopped.Register(async () =>
+            {
+                logger.LogInformation("Application stopped!");
+                // Ensure logs are flushed
+                await Task.Delay(1.Seconds());
+            });
 
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
         private async Task ExecuteGracefulShutdown(int timeout)
         {            
-            if(await TaskExtensions.TryWaitUntil(() => !service.HasActiveRequests, frequency: 25.Milliseconds(), timeout: 30.Seconds()).ConfigureAwait(false))
+            if(await TaskExtensions.TryWaitUntil(() => !service.HasActiveRequests,
+                onFailure: () => {
+                    logger.LogWarning($"Service has {service.Counter} active requests remaining");
+                }, 
+                frequency: 25.Milliseconds(), 
+                timeout: timeout.Seconds()).ConfigureAwait(false))
             {
                 logger.LogInformation("Service drained successfully");
             }
@@ -40,6 +51,11 @@ namespace K8SHosting.Shutdown
             }
         }
 
+        /// <summary>
+        /// Alternative solution to draining the service is to invoke ExecuteGracefulShutdown from here
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken)
         {
             return Task.CompletedTask;

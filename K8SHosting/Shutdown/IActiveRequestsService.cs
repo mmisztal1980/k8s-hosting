@@ -5,6 +5,8 @@
         void Increment();
         void Decrement();
 
+        long Counter { get; }
+
         bool HasActiveRequests { get; }
 
     }

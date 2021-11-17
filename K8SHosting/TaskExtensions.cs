@@ -71,11 +71,15 @@ namespace K8SHosting
         /// <param name="frequency">The frequency at which the condition will be checked.</param>
         /// <param name="timeout">The timeout in milliseconds.</param>
         /// <returns></returns>
-        public static async Task<bool> TryWaitUntil(Func<bool> condition, TimeSpan frequency, TimeSpan timeout)
+        public static async Task<bool> TryWaitUntil(Func<bool> condition, TimeSpan frequency, TimeSpan timeout, Action onFailure = null)
         {
             var waitTask = Task.Run(async () =>
             {
-                while (!condition()) await Task.Delay(frequency);
+                while (!condition()) 
+                { 
+                    await Task.Delay(frequency);
+                    onFailure?.Invoke();
+                }
             });
 
             if (waitTask != await Task.WhenAny(waitTask,
