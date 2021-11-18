@@ -49,6 +49,9 @@ namespace K8SHosting.Shutdown
             {
                 logger.LogError($"Failed to drain pending requests within {timeout} [s]");
             }
+
+            // Ensure logs are flushed
+            await Task.Delay(1.Seconds());
         }
 
         /// <summary>
