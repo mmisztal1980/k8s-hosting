@@ -29,8 +29,9 @@ namespace K8SHosting
                 svc.AddHostedService<StartupService>();
                 svc.AddHostedService<ShutdownService>();
 
+                // this needs to be: x < pod.spec.terminationGracePeriodSeconds
                 svc.Configure<HostOptions>(opts => opts.ShutdownTimeout = 60.Seconds());
-            });            
+            });
         }
 
         public string Id { get; init; }
